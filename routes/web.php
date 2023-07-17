@@ -54,7 +54,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('users', [WebsiteUser::class, 'update']);
     Route::middleware(['IsAdmin'])->prefix('manage')->group(function () {
 
-        Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+//        Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
         Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
         Route::get('settings/pages/{page}', [SettingController::class, 'pages'])->name('settings.pages');
@@ -102,6 +102,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 Route::middleware(['sso'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 });
 
