@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'loginRoute' => 'https://facbg.gov.ps/diwan_courses/home',
+    'loginRoute' => env('SAML2_LOGIN_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'logoutRoute' => '/a',
+    'logoutRoute' => env('SAML2_LOGOUT_URL'),
 
 
     /*
@@ -170,10 +170,8 @@ return [
         |
         */
 
-        'x509cert' => 'MIIEQjCCAyqgAwIBAgIJAIVlfRDBPqJ7MA0GCSqGSIb3DQEBBQUAMHMxCzAJBgNVBAYTAnBzMQ0wCwYDVQQIEwRnYXphMQ0wCwYDVQQHEwRnYXphMQwwCgYDVQQKEwNnY2MxDDAKBgNVBAsTA2djYzEMMAoGA1UEAxMDc3NvMRwwGgYJKoZIhvcNAQkBFg1zZGFkYWhAZ292LnBzMB4XDTEyMDIwNTA3MjkxMloXDTIyMDIwNDA3MjkxMlowczELMAkGA1UEBhMCcHMxDTALBgNVBAgTBGdhemExDTALBgNVBAcTBGdhemExDDAKBgNVBAoTA2djYzEMMAoGA1UECxMDZ2NjMQwwCgYDVQQDEwNzc28xHDAaBgkqhkiG9w0BCQEWDXNkYWRhaEBnb3YucHMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDDmfrkiMFe1uvVxrFlHYDaFREoYnf+vdpbuTVZFt73GEKiKEuQWO0FjxFy+duh40XmvpNc665hNhgqxkXiRD832DhkJivqG6IpBXRamoN0jJWaUwG2NPoLaRduBs8Cfs/HIlk+c52qv8vp8rk+Nn1a7vWj3txrMGxa1HZgeZaAbUzWn2p1d0YOZmPWpNWIj8rZdfHnmbZ20uLtjfJbcyJhhRyRas3PTijDSSRXkvJ+s9OkIHigvgpwj4EzC2tk+2plG3fleN3B+rjXQTE2ggrPFsZ9EAT73x29CwKLmPttkrSiLHzFSZq+AVYJ6EfTO252dy8M5v9jmIv/XI9HamdbAgMBAAGjgdgwgdUwHQYDVR0OBBYEFHHwu7mLmRl+dD2EQZRa3uC6YKdOMIGlBgNVHSMEgZ0wgZqAFHHwu7mLmRl+dD2EQZRa3uC6YKdOoXekdTBzMQswCQYDVQQGEwJwczENMAsGA1UECBMEZ2F6YTENMAsGA1UEBxMEZ2F6YTEMMAoGA1UEChMDZ2NjMQwwCgYDVQQLEwNnY2MxDDAKBgNVBAMTA3NzbzEcMBoGCSqGSIb3DQEJARYNc2RhZGFoQGdvdi5wc4IJAIVlfRDBPqJ7MAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEFBQADggEBABehrOcCaXbekP4HS0mmMNS9mqnoJT0kKZlQnN3DpkiBpiXZr+ehg78rzdzcsM2mEGZdU5wCOolPfZkKWag/kwhz6HJg/9s4tc3czEoar669TzUNVxFew2DCXTvq6/zZVJ4DRjGX7+KCI8Xt0s98tQNs9YNrst/ocXtccvTUZKsG8B03MjKNvJq8oYAsOs5ee+Iir/jIvZGiQF9M8EbDfeO+B5TcvTB8zLjR88j4WXdjjohxvvpW6lS4vvvpPpEoWM9ed51+b00Ae42B5Fd7oJo/0CLD2SbDrsvVfBXAHH0a2IFPEuhg9bSWSpZOFB2CqFdOktgn/aPrJ9Ko5yg6DMw=',
-        'privateKey' => 'MIIEpQIBAAKCAQEAw5n65IjBXtbr1caxZR2A2hURKGJ3/r3aW7k1WRbe9xhCoihLkFjtBY8RcvnboeNF5r6TXOuuYTYYKsZF4kQ/N9g4ZCYr6huiKQV0WpqDdIyVmlMBtjT6C2kXbgbPAn7PxyJZPnOdqr/L6fK5PjZ9Wu71o97cazBsWtR2YHmWgG1M1p9qdXdGDmZj1qTViI/K2XXx55m2dtLi7Y3yW3MiYYUckWrNz04ow0kkV5LyfrPTpCB4oL4KcI+BMwtrZPtqZRt35Xjdwfq410ExNoIKzxbGfRAE+98dvQsCi5j7bZK0oix8xUmavgFWCehH0ztudncvDOb/Y5iL/1yPR2pnWwIDAQABAoIBAB8EE5yZctAvFEZZs1dtTjlGjenxc0WZpT5WJ/dwgPp9hlNgQFsrPqpa/VFV/VW2TCdCoOtjE8umYD6oIfy3Ba89QfPfeactqpEGpGSZi663fCF0eBkEXYHhsC1qNvkWUqwo7i3Q93dT4mm+a1FKIqaArcLGW/1DOGtOtVam8Q57/2IBlpoC3ZEPO8/yrT0zAykBSN+nFrxMC+4XcdgRRV0K/b+9LpQlq0rLJPFbd0MWK1B8gZp3sFK8OEz2aTFo+PeuBhhVgkgxLs8PNVjnqwHUi0MCRoFDOgdjzHXFu9UzW2XI0dBdTON+BiEm5KPU4jGG9xV/ITv+uHqGSfTeeYECgYEA6dsxDFOy1jn2ngDqokBxrzdqZtXAmhdXt95h01qrd5vf/BqcIltKQ+aMYpTovv1PXIfGAfL2QcFDeN2vVMwLGQ+445NhFSDhtYmE0KblKjX8RFGHL4yr5gO0VRweK2XjPVlYkB0O30OH57LgdoTpafAGw/Z0vlPvzLjV/yRiYAkCgYEA1h94zDU92GE6DGhjXBRH4QC6f9A5IDsmnhkj2HZbVtwaUUV3aDfNg+Pe23dfTCzpIsvBFogbeM9O6fRuQ7tfmzhwoGH3mJmGBRJEpPFvdCuKhL43/u4S0PvOZ29s+lQrm7cV
-9FBbHsjWm32Ij89d5AwG9+LbU4JblK07XgCIXUMCgYEAlBINhFiaq7oXxQOfjQxw7xiPbn15bhfJmspb9o86coln0SCoK7jR1RxtVx4iIIwTa+ssHJ/R/OB58FWtZmuruzqRPsdaeR5Qy7k/Nz31bDyydi+JATp4vTMrQ5iCIchpkba4tMcxW3xO2Q4Rwfl2MXWhUwMB+GD9PQrrtJk9EMECgYEAkQSrqZJ9mmjvCaxBbwGFVQxLQ3lg10V4eCcKsfYnEoLriBOGNZ1loWfZbcZBUrQwCZL56SqxgHbXOXiEnXbv346wKM9xA3cm35RpzVR/aax7mj/CaPQQ5l1Eg6Vhp4EOL94mDlvF+umG/7RboxqMuoCyz3xjkwF8yQsyZA30TUUCgYEA54lqm1UuujhRT7uCbSQh1/kDKDk1/SQCosg3kTkClZwfveUmPUrD///1CJqGZVawBHOiQPfCD3AOBy83Dd8D9UdOoIMLjbxkMW75EyBfwWqmcvW+6BZaBmvD7ar71DdJLPmxw050SISndj3dTUv2PWiciE//bndLMd2+Ao+gFhg=',
-
+        'x509cert' => env('SAML2_SP_CERT_x509',''),
+        'privateKey' => env('SAML2_SP_CERT_PRIVATEKEY',''),
 
         /*
         |--------------------------------------------------------------------------
@@ -184,7 +182,7 @@ return [
         |
         */
 
-        'entityId' => env('SAML2_SSO_SP_ENTITYID',''),
+        'entityId' => env('SAML2_SP_ENTITYID',''),
 
         /*
         |--------------------------------------------------------------------------
