@@ -33,7 +33,7 @@ Route::get('loginTest', function (){
 Route::get('logoutTest', function (){
     return "Hi";
 });
-Route::get('error', function (){
+Route::get('logoutTest', function (){
     return "Hi";
 });
 
@@ -109,7 +109,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 });
-Route::middleware(['sso'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 });
