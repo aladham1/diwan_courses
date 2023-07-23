@@ -17,7 +17,7 @@ class SSO
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle(Request $request, Closure $next)
-    {
+    {dd(\auth()->user());
         if (!\auth()->check()){
             if ($request->ajax()){
                 return  response()->json([], 401);
