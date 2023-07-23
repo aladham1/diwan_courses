@@ -32,7 +32,7 @@ class EventServiceProvider extends ServiceProvider
     {
         Event::listen(SignedIn::class, function (SignedIn $event) {
             $messageId = $event->getAuth()->getLastMessageId();
-
+var_dump($messageId);exit();
             // your own code preventing reuse of a $messageId to stop replay attacks
             $samlUser = $event->getSaml2User();
             $attributes = $samlUser->getAttributes();
