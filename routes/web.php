@@ -109,7 +109,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 });
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['sso'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 });
