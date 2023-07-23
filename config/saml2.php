@@ -74,7 +74,7 @@ return [
     |
     */
 
-    'loginRoute' => '/',
+    'loginRoute' => 'https://facbg.gov.ps/diwan_courses/home',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,7 +85,7 @@ return [
     |
     */
 
-    'logoutRoute' => env('SAML2_LOGOUT_URL'),
+    'logoutRoute' => '/',
 
 
     /*
