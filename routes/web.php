@@ -25,8 +25,14 @@ use App\Http\Controllers\Website\UserController as WebsiteUser;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [HomePageController::class, 'index'])->name('index');
+//Route::get('/', [HomePageController::class, 'index'])->name('index');\
 
+Route::get('loginTest', function (){
+    return "Hi";
+});
+Route::get('logoutTest', function (){
+    return "Hi";
+});
 
 
 //if (!strpos(Request::url(), "manage") && !strpos(Request::url(), "payment-error") &&
