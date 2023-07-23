@@ -33,7 +33,9 @@ Route::get('loginTest', function (){
 Route::get('logoutTest', function (){
     return "Hi";
 });
-
+Route::get('error', function (){
+    return "Hi";
+});
 
 //if (!strpos(Request::url(), "manage") && !strpos(Request::url(), "payment-error") &&
 //    !strpos(Request::url(), "payment-call-back") && !strpos(Request::url(), "reset-password")
@@ -107,7 +109,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
 });
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['sso'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 });
