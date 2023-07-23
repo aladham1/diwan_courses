@@ -184,7 +184,7 @@ return [
         |
         */
 
-        'entityId' => env('SAML2_SP_ENTITYID',''),
+        'entityId' => env('SAML2_SSO_SP_ENTITYID',''),
 
         /*
         |--------------------------------------------------------------------------
