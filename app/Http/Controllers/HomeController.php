@@ -7,7 +7,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('manage.home');
+        var_dump("f");exit();
     }
 
 }

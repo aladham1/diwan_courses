@@ -35,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
             // your own code preventing reuse of a $messageId to stop replay attacks
             $samlUser = $event->getSaml2User();
             $attributes = $samlUser->getAttributes();
-
+var_dump($attributes);exit();
             session([
                'logged_in' => true,
                 'user_id' => $attributes['UserIdentity'][0],
@@ -46,10 +46,10 @@ class EventServiceProvider extends ServiceProvider
             ]);
         });
 
-//        Event::listen('Slides\Saml2\Events\SignedOut', function (SignedOut $event) {
-//            session(['logged_in' => false]);
-//            Session::save();
-//        });
+        Event::listen('Slides\Saml2\Events\SignedOut', function (SignedOut $event) {
+            session(['logged_in' => false]);
+            Session::save();
+        });
     }
 
     /**
