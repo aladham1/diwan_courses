@@ -7,7 +7,6 @@ use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
-use Slides\Saml2\Events\SignedIn;
 use Slides\Saml2\Events\SignedOut;
 
 class EventServiceProvider extends ServiceProvider
@@ -30,9 +29,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Event::listen(SignedIn::class, function (SignedIn $event) {
+        Event::listen(\Slides\Saml2\Events\SignedIn::class, function (\Slides\Saml2\Events\SignedIn $event) {
             $messageId = $event->getAuth()->getLastMessageId();
-var_dump($messageId);exit();
+
             // your own code preventing reuse of a $messageId to stop replay attacks
             $samlUser = $event->getSaml2User();
             $attributes = $samlUser->getAttributes();
@@ -47,10 +46,10 @@ var_dump($messageId);exit();
             ]);
         });
 
-        Event::listen('Slides\Saml2\Events\SignedOut', function (SignedOut $event) {
-            session(['logged_in' => false]);
-            Session::save();
-        });
+//        Event::listen('Slides\Saml2\Events\SignedOut', function (SignedOut $event) {
+//            session(['logged_in' => false]);
+//            Session::save();
+//        });
     }
 
     /**
