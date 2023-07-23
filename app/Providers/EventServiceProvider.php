@@ -35,7 +35,7 @@ class EventServiceProvider extends ServiceProvider
             // your own code preventing reuse of a $messageId to stop replay attacks
             $samlUser = $event->getSaml2User();
             $attributes = $samlUser->getAttributes();
-
+dd($attributes['UserIdentity'][0]);
             session([
                'logged_in' => true,
                 'user_id' => $attributes['UserIdentity'][0],
