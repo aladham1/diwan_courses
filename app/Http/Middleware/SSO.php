@@ -17,18 +17,15 @@ class SSO
      */
     public function handle(Request $request, Closure $next)
     {
-      
         if (!session('logged_in')){
             if ($request->ajax()){
                 return  response()->json([], 401);
             }else{
-                var_dump(session('logged_in'));exit();
                 $tenant = Tenant::where('key', 'ssoidp')->first();
                 $redirectTo = saml_url($request->fullUrl(), $tenant->uuid);
+
                 return  redirect($redirectTo);
             }
-        }else{
-            return  redirect()->route('dashboard');
         }
         return $next($request);
     }
