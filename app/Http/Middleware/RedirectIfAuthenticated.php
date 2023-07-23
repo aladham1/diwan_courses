@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, ...$guards)
     {
-        if ($this->auth->guest())
+        if (auth()->guest())
         {
             if ($request->ajax())
             {
