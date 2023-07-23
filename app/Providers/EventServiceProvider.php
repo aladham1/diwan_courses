@@ -44,7 +44,6 @@ class EventServiceProvider extends ServiceProvider
                 'user_ministry_code' => $attributes['MINISTRY_CD'][0] ?? null,
                 'user_ministry_name' => $attributes['MINISTRY_NAME'][0] ?? null,
             ]);
-            dd(\session('logged_in'));
         });
 
         Event::listen('Slides\Saml2\Events\SignedOut', function (SignedOut $event) {
