@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Route;
 //Route::get('/', [HomePageController::class, 'index'])->name('index');\
 
 Route::get('loginTest', function (){
-    return "Hi";
+    return "Hiaaa";
 });
 Route::get('logoutTest', function (){
     return "Hi";
