@@ -17,6 +17,7 @@ class SSO
      */
     public function handle(Request $request, Closure $next)
     {
+        var_dump(session('logged_in'));exit();
         if (!session('logged_in')){
             if ($request->ajax()){
                 return  response()->json([], 401);
