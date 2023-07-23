@@ -6,6 +6,7 @@ use App\Providers\RouteServiceProvider;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Slides\Saml2\Models\Tenant;
 
 class RedirectIfAuthenticated
 {
@@ -23,7 +24,9 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $tenant = Tenant::where('key', 'ssoidp')->first();
+                $redirectTo = saml_url($request->fullUrl(), $tenant->uuid);
+                return  redirect($redirectTo);
             }
         }
 
