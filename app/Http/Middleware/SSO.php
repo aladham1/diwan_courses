@@ -21,7 +21,10 @@ class SSO
             if ($request->ajax()){
                 return  response()->json([], 401);
             }else{
-               return "f";
+                $tenant = Tenant::where('key', 'ssoidp')->first();
+                $redirectTo = saml_url($request->fullUrl(), $tenant->uuid);
+
+                return  redirect($redirectTo);
             }
         }
         return $next($request);
