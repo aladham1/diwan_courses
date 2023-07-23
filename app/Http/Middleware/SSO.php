@@ -23,7 +23,6 @@ class SSO
             }else{
                 $tenant = Tenant::where('key', 'ssoidp')->first();
                 $redirectTo = saml_url($request->fullUrl(), $tenant->uuid);
-var_dump($redirectTo);exit();
                 return  redirect($redirectTo);
             }
         }
