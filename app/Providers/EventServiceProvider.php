@@ -38,15 +38,9 @@ class EventServiceProvider extends ServiceProvider
             $samlUser = $event->getSaml2User();
             $attributes = $samlUser->getAttributes();
 
-            session([
-               'logged_in' => true,
-                'user_id' => $attributes['UserIdentity'][0],
-                'user_name' => $attributes['Name'][0],
-                'user_mobile' => $attributes['Mobile'][0] ?? null,
-                'user_ministry_code' => $attributes['MINISTRY_CD'][0] ?? null,
-                'user_ministry_name' => $attributes['MINISTRY_NAME'][0] ?? null,
-            ]);
+
             $user = User::where('ssn', $attributes['UserIdentity'][0])->first();
+            dd($user);
             Auth::login($user);
         });
 
