@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('phone')->unique()->nullable();
             $table->string('email')->unique()->nullable();
-            $table->integer('ssn')->unique();
+            $table->integer('ssn')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->boolean('is_admin')->default(1);
             $table->rememberToken();
             $table->softDeletes();
