@@ -18,7 +18,7 @@ class SSO
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()){
+        if (!auth()->check()){
             if ($request->ajax()){
                 return  response()->json([], 401);
             }else{
