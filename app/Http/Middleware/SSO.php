@@ -27,6 +27,6 @@ class SSO
                 return  redirect($redirectTo);
             }
         }
-        return $next($request);
+        //return $next($request);
     }
 }

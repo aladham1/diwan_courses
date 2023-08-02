@@ -40,7 +40,6 @@ class EventServiceProvider extends ServiceProvider
             $user = User::where('ssn', $attributes['UserIdentity'][0])->first();
 
             Auth::login($user);
-            dd(\auth()->user());
         });
 
         Event::listen('Slides\Saml2\Events\SignedOut', function (SignedOut $event) {
