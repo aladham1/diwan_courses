@@ -26,7 +26,9 @@ class SSO
                 $redirectTo = saml_url($request->fullUrl(), $tenant->uuid);
                 return  redirect($redirectTo);
             }
+        }else{
+            return redirect()->route('home');
         }
-        //return $next($request);
+        return $next($request);
     }
 }
