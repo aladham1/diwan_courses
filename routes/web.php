@@ -37,15 +37,6 @@ Route::get('logoutTest', function (){
     return "Hi";
 });
 
-//if (!strpos(Request::url(), "manage") && !strpos(Request::url(), "payment-error") &&
-//    !strpos(Request::url(), "payment-call-back") && !strpos(Request::url(), "reset-password")
-//    && !strpos(Request::url(), "details")) {
-//    Route::get('/{vue_capture?}', function () {
-//        return view('index');
-//    })->where('vue_capture', '[\/\w\.-]*');
-//}
-Route::get('payment-call-back', [SubscriptionController::class, 'paymentCallBack'])
-    ->name('paymentCallBack');
 Route::get('payment-error', [SubscriptionController::class, 'paymentError'])
     ->name('paymentError');
 Route::get('courses/details/{id}', [CourseController::class, 'details']);
@@ -53,14 +44,12 @@ Route::get('courses/details/{id}', [CourseController::class, 'details']);
 Route::post('/forgot-password', [UserController::class, 'forgetPassword'])
     ->middleware('guest');
 
-Route::post('coupons', [SubscriptionController::class, 'checkCoupon']);
-Route::post('subscription', [SubscriptionController::class, 'store']);
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
-    Route::put('users', [WebsiteUser::class, 'update']);
-    Route::middleware(['IsAdmin'])->prefix('manage')->group(function () {
+    Route::middleware(['IsAdmin'])->group(function () {
 
 //        Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
