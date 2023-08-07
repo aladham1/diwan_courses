@@ -103,3 +103,27 @@ h3.home-d{
     padding-top: 7px;
     font-size: 50px;
 }
+.form-section {
+    margin-bottom: 20px;
+}
+.form-section h3{
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #cacaca;
+    font-size: 17px;
+}
+.form-section label {
+    font-size: 16px;
+}
+
+.form-section .form-check:not(:first-child) {
+    padding-right: 70px;
+}
+
+.form-section textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    margin-top: 20px;
+}

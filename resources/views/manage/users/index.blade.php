@@ -1,4 +1,4 @@
-<x-manage title="{{__('Users')}}">
+<x-manage title="الموظفين">
     <x-slot name="headerPage">
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
              data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"

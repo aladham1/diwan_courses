@@ -4,8 +4,10 @@ use App\Http\Controllers\Auth\ManagerController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EvaluatedAction;
 use App\Http\Controllers\ExpenseCategoryController;
 use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\GetEvaluationAction;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InterestedCourseController;
 use App\Http\Controllers\MaterialController;
@@ -14,6 +16,7 @@ use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\StoreEvaluationAction;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TrainerCategoryController;
 use App\Http\Controllers\TrainerController;
@@ -67,39 +70,25 @@ Route::middleware(['auth'])->group(function () {
 
 //        Route::post('users', [UserController::class, 'store']);
 //        Route::post('restore-user/{id}', [UserController::class, 'restoreUser']);
-//        Route::delete('users/{id}', [UserController::class, 'destroy']);
-//        Route::put('users/{user}', [UserController::class, 'update']);
+       Route::delete('users/{user}', [UserController::class, 'destroy']);
+        Route::put('users/{user}', [UserController::class, 'update']);
 //        Route::get('users', [UserController::class, 'index'])->name('users.index');
 //        Route::get('get-users', [UserController::class, 'getUsers']);
 //        Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
         Route::get('my-account', [UserController::class, 'myAccount'])->name('my_account');
         Route::put('my-account', [UserController::class, 'updateMyAccount']);
 
-        Route::resource('units', UnitController::class)->except('show', 'edit');
-        Route::post('units-restore/{id}', [UnitController::class, 'restore']);
-        Route::get('get-units', [UnitController::class, 'getUnits']);
-
-
-        Route::post('storeImage', [SliderController::class, 'storeImage']);
-        Route::get('get-workshops', [WorkshopController::class, 'getWorkshops'])->name('getWorkshops');
-
-        Route::get('iterated-courses', [InterestedCourseController::class, 'index'])->name('iterated.index');
-        Route::get('get-interested-courses', [InterestedCourseController::class, 'getInterested']);
-        Route::delete('iterated-courses/{id}', [InterestedCourseController::class, 'destroy']);
-
-        Route::resource('expenses-categories', ExpenseCategoryController::class)->except('show',
-            'edit', 'create');
-        Route::post('expenses-categories-restore/{id}', [ExpenseCategoryController::class, 'restore']);
-        Route::get('get-expenses-categories', [ExpenseCategoryController::class, 'getCategories']);
-        Route::get('get-expenses-categories-child/{id}', [ExpenseCategoryController::class, 'getCategoryChild']);
-
-
-
+        Route::resource('courses', CourseController::class);
+        Route::get('get-courses', [CourseController::class, 'getCourses']);
+        Route::get('course/{course}', GetEvaluationAction::class);
+        Route::post('course', StoreEvaluationAction::class)->name('evaluation.store');
     });
 
 });
+//Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+
 Route::middleware(['auth.sso'])->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+//    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 });
 

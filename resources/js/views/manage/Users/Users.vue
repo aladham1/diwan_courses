@@ -18,7 +18,7 @@
                         <input type="text"
                                v-model="searchQuery" @keyup="search"
                                class="form-control form-control-solid w-250px ps-14"
-                               placeholder="Search">
+                               placeholder="بحث">
                     </div>
                 </div>
                 <div class="card-toolbar">
@@ -49,7 +49,7 @@
                             <th>الاسم</th>
                             <th>رقم الهوية</th>
                             <th>رقم الجوال</th>
-                            <th>الادارة</th>
+<!--                            <th>الادارة</th>-->
                             <th class="text-center" v-if="can_delete || can_edit">عمليات</th>
                         </tr>
                         </thead>
@@ -57,12 +57,12 @@
                         <tr v-for="(user, index) in users.data">
                             <td>{{ (current_page * 20) - 20 + index + 1 }}</td>
                             <td>{{ user.name }}</td>
-                            <td>{{ user.email }}</td>
+                            <td>{{ user.ssn }}</td>
                             <td>{{ user.phone }}</td>
-                            <td>
-                              <span v-for="role in user.roles" class="badge m-2 badge-light-primary"> {{ role.name }}
-                            </span>
-                            </td>
+<!--                            <td>-->
+<!--                              <span v-for="role in user.roles" class="badge m-2 badge-light-primary"> {{ role.name }}-->
+<!--                            </span>-->
+<!--                            </td>-->
                             <td class="text-center">
                                 <a href="javascript:;" v-if="can_edit && !deleted" @click="editUser(user)"
                                    class="text-primary me-2">
@@ -71,9 +71,6 @@
 
                                 <a href="javascript:;" v-if="can_delete" @click="deleteUser(user)" class="text-danger ">
                                     <i class="las la-trash text-danger fs-2x"></i>
-                                </a>
-                                <a href="javascript:;" v-if="can_edit && deleted" @click="restore(user)" class="text-primary me-2">
-                                    استعادة
                                 </a>
                             </td>
                         </tr>
@@ -112,7 +109,7 @@
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>تعديل المدير</h2>
+                        <h2>تعديل الموظف</h2>
                         <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
                             <span class="svg-icon svg-icon-1">
 								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -140,50 +137,40 @@
                                           v-text="editForm.errors.get('name')"></span>
                                 </div>
                                 <div class="form-floating mb-7">
-                                    <input type="email" v-model="editForm.email" name="email" class="form-control"
-                                           id="email"
-                                           placeholder="البريد الالكتروني"/>
-                                    <label for="name">البريد الالكتروني</label>
-                                    <span v-if="editForm.errors.has('email')"
-                                          class="fv-plugins-message-container invalid-feedback"
+                                    <input type="number" v-model="editForm.ssn" name="ssn" class="form-control"
+                                           id="ssn"
+                                           placeholder="رقم الهوية"/>
+                                    <label for="ssn">رقم الهوية</label>
+                                    <span v-if="editForm.errors.has('ssn')"
+                                          class="ssn invalid-feedback"
                                           v-text="editForm.errors.get('email')"></span>
                                 </div>
                                 <div class="form-floating mb-7">
-                                    <input type="text" v-model="editForm.phone" name="phone" class="form-control"
+                                    <input type="number" v-model="editForm.phone" name="phone" class="form-control"
                                            id="phone"
                                            placeholder="رقم الجوال"/>
-                                    <label for="name">رقم الجوال</label>
+                                    <label for="phone">رقم الجوال</label>
                                     <span v-if="editForm.errors.has('phone')"
                                           class="fv-plugins-message-container invalid-feedback"
                                           v-text="editForm.errors.get('phone')"></span>
                                 </div>
-                                <div class="form-floating mb-7 mt-5">
-                                    <input type="password" v-model="editForm.password" name="password"
-                                           class="form-control"
-                                           id="password"
-                                           placeholder="كلمة المرور"/>
-                                    <label for="name">كلمة المرور</label>
-                                    <span v-if="editForm.errors.has('password')"
-                                          class="fv-plugins-message-container invalid-feedback"
-                                          v-text="editForm.errors.get('password')"></span>
-                                </div>
-                                <div class="fv-row">
-                                    <label class="fs-5 fw-bolder form-label mb-3">الصلاحيات</label>
-                                    <div class="row">
-                                        <div class="col-3 mb-3" v-for="role in roles">
-                                            <label
-                                                class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                                <input class="form-check-input" type="checkbox" v-model="editForm.roles"
-                                                       :value="role.id" name="roles"/>
-                                                <span class="form-check-label">{{ role.name }}</span>
-                                            </label>
-                                        </div>
+<!--                                <div class="fv-row">-->
+<!--                                    <label class="fs-5 fw-bolder form-label mb-3">الصلاحيات</label>-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-3 mb-3" v-for="role in roles">-->
+<!--                                            <label-->
+<!--                                                class="form-check form-check-sm form-check-custom form-check-solid me-5">-->
+<!--                                                <input class="form-check-input" type="checkbox" v-model="editForm.roles"-->
+<!--                                                       :value="role.id" name="roles"/>-->
+<!--                                                <span class="form-check-label">{{ role.name }}</span>-->
+<!--                                            </label>-->
+<!--                                        </div>-->
 
-                                    </div>
-                                    <span v-if="editForm.errors.has('roles')"
-                                          class="fv-plugins-message-container invalid-feedback"
-                                          v-text="editForm.errors.get('roles')"></span>
-                                </div>
+<!--                                    </div>-->
+<!--                                    <span v-if="editForm.errors.has('roles')"-->
+<!--                                          class="fv-plugins-message-container invalid-feedback"-->
+<!--                                          v-text="editForm.errors.get('roles')"></span>-->
+<!--                                </div>-->
                             </div>
                             <div class="text-center pt-15">
                                 <button type="submit" :disabled="editForm.errors.any()" class="btn btn-primary">
@@ -221,11 +208,9 @@ export default {
             postProgressEdit: false,
             editForm: new Form({
                 id: '',
-                email: '',
+                ssn: '',
                 name: '',
                 phone: '',
-                password: '',
-                roles: [],
             }),
         }
     }
@@ -350,7 +335,7 @@ export default {
         editUser(user) {
             $('#kt_modal_edit').modal('show');
             this.editForm.id = user.id;
-            this.editForm.email = user.email;
+            this.editForm.ssn = user.ssn;
             this.editForm.name = user.name;
             this.editForm.phone = user.phone;
             this.editForm.roles = user.roles.map(e => e.id);

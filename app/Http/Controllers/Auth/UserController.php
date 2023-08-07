@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
-use App\Models\Manager;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Response;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
@@ -27,28 +31,28 @@ class UserController extends Controller
      */
     public function index()
     {
-      $this->authorize('view-any', User::class);
+        $this->authorize('view-any', User::class);
         return view(self::PREFIX . 'users.index');
     }
 
 
     /**
-     * @return LengthAwarePaginator
+     * @return LengthAwarePaginator|Builder[]|Collection
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function getUsers(): LengthAwarePaginator
+    public function getUsers(): Collection|LengthAwarePaginator|array
     {
         $users = User::with('roles')->where('id','!=',1);
         if (\request()->get('query') != 'null' && !empty(\request()->get('query'))) {
             $users = $users->where('name', 'LIKE', '%' . \request()->get('query') . '%')
-                ->orWhere('email', 'LIKE', '%' . \request()->get('query') . '%')
+                ->orWhere('ssn', 'LIKE', '%' . \request()->get('query') . '%')
                 ->orWhere('phone', 'LIKE', '%' . \request()->get('query') . '%');
         }
-        if (\request()->deleted != 'null') {
-            $users = $users->onlyTrashed();
+        if (request()->all) {
+            return $users->orderBy('id', 'DESC')->select('id','name')->get();
         }
-        return $users->IsAdmin()->orderBy('id', 'DESC')->paginate(20);
+        return $users->orderBy('id', 'DESC')->paginate(20);
     }
 
 
@@ -59,12 +63,34 @@ class UserController extends Controller
     {
         $user = Manager::forceCreate([
             'name' => $request->name,
-            'email' => $request->email,
             'phone' => $request->phone,
-            'password' => bcrypt($request->password),
-            'is_admin' => 1,
+            'ssn' => $request->ssn,
         ]);
         $user->roles()->sync($request->roles);
         return $user->load('roles');
+    }
+
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $user->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'ssn' => $request->ssn,
+        ]);
+        return $user;
+    }
+
+    /**
+     * @param User $user
+     * @return Application|ResponseFactory|Response
+     */
+    public function destroy(User $user): Response|Application|ResponseFactory
+    {
+        $user->delete();
+        $data = [
+            'status' => 'success',
+            'message' => 'تم حذف المسخدم بنجاح'
+        ];
+        return response($data, 200);
     }
 }

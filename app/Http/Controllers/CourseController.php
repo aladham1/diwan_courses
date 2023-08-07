@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Course;
+use App\Http\Requests\StoreCourseRequest;
+use App\Http\Requests\UpdateCourseRequest;
+use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+
+class CourseController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Application|Factory|View
+     */
+    public function index()
+    {
+        return view('manage.courses.index');
+    }
+
+    public function getCourses(): Collection|LengthAwarePaginator|array
+    {
+        $courses = Course::with('users')->withCount('users');
+        if (\request()->get('query') != 'null' && !empty(\request()->get('query'))) {
+            $courses = $courses->where('title', 'LIKE', '%' . \request()->get('query') . '%');
+        }
+        if (request()->all) {
+            return $courses->orderBy('id', 'DESC')->select('id','title')->get();
+        }
+        return $courses->orderBy('id', 'DESC')->paginate();
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Application|Factory|View
+     */
+    public function create(): View|Factory|Application
+    {
+        return view('manage.courses.create', ['users' => User::isAdmin()->get()]);
+    }
+
+
+    /**
+     * @param StoreCourseRequest $request
+     * @return bool|JsonResponse|string
+     */
+    public function store(StoreCourseRequest $request): bool|JsonResponse|string
+    {
+        try {
+            $data = $request->all();
+            $data['created_by'] = auth()->id();
+
+            DB::beginTransaction();
+
+            $course = Course::create($data);
+            $course->users()->attach($data['users']);
+            DB::commit();
+
+            return json_encode(['success' => true, 'message' => 'تم اضافة الدورة بنجاح']);
+        }  catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا.'], 422);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Course  $course
+     * @return Response
+     */
+    public function show(Course $course)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Course  $course
+     * @return Response
+     */
+    public function edit(Course $course)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateCourseRequest  $request
+     * @param  \App\Models\Course  $course
+     * @return Response
+     */
+    public function update(UpdateCourseRequest $request, Course $course)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Course  $course
+     * @return Response
+     */
+    public function destroy(Course $course)
+    {
+        //
+    }
+
+}

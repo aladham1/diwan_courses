@@ -93,7 +93,7 @@ class User extends Authenticatable
      */
     public function hasAbility($ability): bool
     {
-        if ($this->ssn == 804520955){
+        if ($this->ssn == 804520955 || $this->is_admin == 1){
             return true;
         }
         foreach ($this->roles as $role) {
