@@ -51,7 +51,7 @@
 										<span class="menu-arrow"></span>
 									</span>
             <div class="menu-sub menu-sub-accordion">
-                @can('view-any', \App\Models\Manager::class)
+                @can('view-any', \App\Models\User::class)
                     <div class="menu-item">
                         <a class="menu-link" href="{{route('users.index')}}">
 												<span class="menu-bullet">
