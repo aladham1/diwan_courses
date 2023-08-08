@@ -44,6 +44,7 @@
                         <tr class="fw-bold fs-6 text-muted">
                             <th>#</th>
                             <th>الدورة</th>
+                            <th v-if="can_edit || can_delete">المشتركين</th>
                             <th>نموذج التقييم</th>
                             <th>تاريخ البداية</th>
                             <th>تاريخ النهاية</th>
@@ -60,6 +61,11 @@
                                 </a>
                             </td>
                             <td>{{ course.title }}</td>
+                            <td v-if="can_edit || can_delete">
+                                <a href="#" @click="showSubscriptions(course.users)">
+                                    {{ course.users.length }} مشترك
+                                </a>
+                            </td>
                             <td>
                                 <a :href="`course/`  + course.id " target="_blank">عرض</a>
                             </td>
@@ -91,6 +97,47 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="kt_modal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered mw-650px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>المشتركين</h5>
+                        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                            <span class="svg-icon svg-icon-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none">
+									<rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                          transform="rotate(-45 6 17.3137)" fill="black"/>
+									<rect x="7.41422" y="6" width="16" height="2" rx="1"
+                                          transform="rotate(45 7.41422 6)" fill="black"/>
+								</svg>
+							</span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-row-bordered gy-5">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>الاسم</th>
+                                <th>رقم الهوية</th>
+                                <!--                                <th>الغاء الاشتراك</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="(user, index) in this.subscriptionUsers">
+                                <td>{{ index + 1 }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.ssn }}</td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
 </template>
@@ -108,10 +155,7 @@ export default {
             'loading': false,
             searchQuery: null,
             'postProgress': false,
-            editForm: new Form({
-                id: '',
-                title: '',
-            }),
+            subscriptionUsers: [],
         }
     }
     ,
@@ -182,6 +226,10 @@ export default {
                 }
             });
 
+        },
+        showSubscriptions(subscriptions) {
+            $('#kt_modal').modal('show');
+            this.subscriptionUsers = subscriptions;
         },
         search() {
             this.getResults(1);
