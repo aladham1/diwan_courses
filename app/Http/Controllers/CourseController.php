@@ -24,8 +24,8 @@ class CourseController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Course::class,null, [
-            'except' => [ 'index'],
+        $this->authorizeResource(Course::class, null, [
+            'except' => ['index'],
         ]);
     }
 
@@ -42,6 +42,13 @@ class CourseController extends Controller
 
     public function getCourses(): Collection|LengthAwarePaginator|array
     {
+        if (Auth::user()->hasAbility('courses.update')) {
+            $courses = Course::with('users')->withCount('users');
+        } else {
+            $courses = Course::whereHas('users', function ($query) {
+                $query->where('user_id', auth()->id());
+            });
+        }
         $courses = Course::with('users')->withCount('users');
         if (\request()->get('query') != 'null' && !empty(\request()->get('query'))) {
             $courses = $courses->where('title', 'LIKE', '%' . \request()->get('query') . '%');
