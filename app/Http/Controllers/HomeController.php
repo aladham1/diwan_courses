@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+
 class HomeController extends Controller
 {
 
-    public function index()
+    public function index(): RedirectResponse
     {
-        dd(auth()->user());
         return redirect()->route('courses.index');
     }
 
