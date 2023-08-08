@@ -24,7 +24,9 @@ class CourseController extends Controller
      */
     public function __construct()
     {
-        $this->authorizeResource(Course::class);
+        $this->authorizeResource(Course::class,null, [
+            'except' => [ 'index', 'show' ],
+        ]);
     }
 
 
