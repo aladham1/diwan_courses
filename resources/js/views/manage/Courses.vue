@@ -131,7 +131,8 @@
                                 <td>{{ user.ssn }}</td>
                                 <td>
                                     <a v-if="!user.is_evaluated" class="badge m-2 badge-light-danger">لم يتم التقييم</a>
-                                    <a :href="`/showEvaluate/`+user.evalutated_id" v-else-if="user.is_evaluated" target="_blank"
+                                    <a :href="`/showEvaluate/`+user.evalutated_id" v-else-if="user.is_evaluated"
+                                       target="_blank"
                                        class="badge m-2 badge-light-success">تم التقييم</a>
                                 </td>
 
@@ -165,20 +166,21 @@ export default {
     },
     computed: {
         processedUsers() {
-            if (!this.courses.data || !Array.isArray(this.courses.data)) {
-                return [];
-            }
-            const processedUsers = [];
-            this.courses.data.forEach(course => {
-                course.users.forEach(user => {
-                    const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
-                    user.evalutated_id = evaluation ? evaluation.id : null;
-                    user.is_evaluated = evaluation !== undefined;
-                    processedUsers.push(user);
+            if (this.can_edit) {
+                if (!this.courses.data || !Array.isArray(this.courses.data)) {
+                    return [];
+                }
+                const processedUsers = [];
+                this.courses.data.forEach(course => {
+                    course.users.forEach(user => {
+                        const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
+                        user.evalutated_id = evaluation ? evaluation.id : null;
+                        user.is_evaluated = evaluation !== undefined;
+                        processedUsers.push(user);
+                    });
                 });
-            });
-
-            return processedUsers;
+                return processedUsers;
+            }
         }
     },
     mounted() {
