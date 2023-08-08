@@ -48,6 +48,7 @@
                             <th>تاريخ البداية</th>
                             <th>تاريخ النهاية</th>
                             <th>عدد الأيام</th>
+                            <th>حالة الدورة</th>
                             <th class="text-center" v-if="can_edit || can_delete">العمليات</th>
                         </tr>
                         </thead>
@@ -65,6 +66,12 @@
                             <td>{{ course.start_at | date }}</td>
                             <td>{{ course.end_at | date }}</td>
                             <td>{{ course.days }} يوم</td>
+                            <td>
+                                <p v-if="!course.is_active" class="badge m-2 badge-light-danger">
+                                    {{ course.status }}</p>
+                                <p v-else-if="course.is_active" class="badge m-2 badge-light-success">
+                                    {{ course.status }}</p>
+                                </td>
 
                             <td class="text-center">
                                 <a :href="`courses/`  + course.id+`/edit`"

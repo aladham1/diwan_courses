@@ -78,14 +78,13 @@ export default {
     props: ['csrf'],
     data() {
         return {
-            users:[],
+            users: [],
             form: new Form({
                 title: '',
                 start_at: '',
                 end_at: '',
-                users:[]
+                users: []
             }),
-
             'postProgress': false,
         }
     },
@@ -95,7 +94,6 @@ export default {
                 this.users = response.data;
             }).catch(error => {
         });
-
     },
     methods: {
 

@@ -18,7 +18,7 @@
                         <input type="text"
                                v-model="searchQuery" @keyup="search"
                                class="form-control form-control-solid w-250px ps-14"
-                               placeholder="Roles">
+                               placeholder="بحث">
                     </div>
                 </div>
                 <div class="card-toolbar"></div>
@@ -41,9 +41,9 @@
                     <table id="kt_datatable_example_1" class="table table-row-bordered gy-5">
                         <thead>
                         <tr class="fw-bold fs-6 text-muted">
-                            <th>Title</th>
-                            <th>Roles</th>
-                            <th class="text-center" v-if="can_edit || can_delete">Action</th>
+                            <th>العنوان</th>
+                            <th>الصلاحيات</th>
+                            <th class="text-center" v-if="can_edit || can_delete">عمليات</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -78,7 +78,7 @@
             <div class="modal-dialog modal-dialog-centered mw-850px">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 class="fw-bolder">Add New Role</h2>
+                        <h2 class="fw-bolder">إضافة صلاحية جديدة</h2>
                         <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-roles-modal-action="close">
                             <span class="svg-icon svg-icon-1">
 														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

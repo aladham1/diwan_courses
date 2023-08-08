@@ -17,6 +17,17 @@ use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
+
+
+    /**
+     *
+     */
+    public function __construct()
+    {
+        $this->authorizeResource(Course::class);
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -34,10 +45,11 @@ class CourseController extends Controller
             $courses = $courses->where('title', 'LIKE', '%' . \request()->get('query') . '%');
         }
         if (request()->all) {
-            return $courses->orderBy('id', 'DESC')->select('id','title')->get();
+            return $courses->orderBy('id', 'DESC')->select('id', 'title')->get();
         }
         return $courses->orderBy('id', 'DESC')->paginate();
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -45,7 +57,7 @@ class CourseController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        return view('manage.courses.create', ['users' => User::isAdmin()->get()]);
+        return view('manage.courses.create');
     }
 
 
@@ -66,7 +78,7 @@ class CourseController extends Controller
             DB::commit();
 
             return json_encode(['success' => true, 'message' => 'تم اضافة الدورة بنجاح']);
-        }  catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['success' => false, 'message' => 'حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا.'], 422);
         }
@@ -75,7 +87,7 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Course  $course
+     * @param Course $course
      * @return Response
      */
     public function show(Course $course)
@@ -86,35 +98,51 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Course  $course
-     * @return Response
+     * @param Course $course
+     * @return Application|Factory|View
      */
-    public function edit(Course $course)
+    public function edit(Course $course): Application|Factory|View
     {
-        //
+        return view('manage.courses.edit', ['course' => $course->load('users')]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCourseRequest  $request
-     * @param  \App\Models\Course  $course
-     * @return Response
+     * @param UpdateCourseRequest $request
+     * @param Course $course
+     * @return false|string
      */
-    public function update(UpdateCourseRequest $request, Course $course)
+    public function update(StoreCourseRequest $request, Course $course): bool|string
     {
-        //
+        try {
+            $data = $request->all();
+            DB::beginTransaction();
+            $course->update($data);
+            $course->users()->sync($data['users']);
+            DB::commit();
+
+            return json_encode(['success' => true, 'message' => 'تم اضافة الدورة بنجاح']);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['success' => false, 'message' => 'حدث خطأ غير متوقع. الرجاء المحاولة مرة أخرى لاحقًا.'], 422);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Course  $course
+     * @param Course $course
      * @return Response
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        $data = [
+            'status' => 'success',
+            'message' => 'تم حذف الصلاحية بنجاح'
+        ];
+        return response($data, 200);
     }
 
 }

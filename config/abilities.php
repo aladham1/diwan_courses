@@ -1,17 +1,23 @@
 <?php
 
 return [
-    'Users' => [
-        'users.create' => 'Create',
-        'users.update' => 'Update',
-        'users.delete' => 'Delete',
-        'users.view' => 'Show',
+    'الموظفين' => [
+        'users.create' => 'إضافة',
+        'users.update' => 'تعديل',
+        'users.delete' => 'حذف',
+        'users.view' => 'عرض',
     ],
-    'Roles' => [
-        'roles.create' => 'Create',
-        'roles.update' => 'Update',
-        'roles.delete' => 'Delete',
-        'roles.view' => 'Show',
+    'الصلاحيات' => [
+        'roles.create' => 'إضافة',
+        'roles.update' => 'تعديل',
+        'roles.delete' => 'حذف',
+        'roles.view' => 'عرض',
+    ],
+    'الدورات' => [
+        'courses.create' => 'إضافة',
+        'courses.update' => 'تعديل',
+        'courses.delete' => 'حذف',
+        'courses.view' => 'عرض',
     ],
 
 ];

@@ -5,15 +5,15 @@
         <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px">
             <div class="fv-row mb-10">
                 <label class="fs-5 fw-bolder form-label mb-2">
-                    <span class="required">Title</span>
+                    <span class="required">العنوان</span>
                 </label>
-                <input class="form-control form-control-solid" v-model="form.title" placeholder="Role title" name="title" />
+                <input class="form-control form-control-solid" v-model="form.title" placeholder="عنوان الصلاحية" name="title" />
                 <span v-if="form.errors.has('title')"
                       class="fv-plugins-message-container invalid-feedback"
                       v-text="form.errors.get('title')"></span>
             </div>
             <div class="fv-row">
-                <label class="fs-5 fw-bolder form-label mb-2">Roles</label>
+                <label class="fs-5 fw-bolder form-label mb-2">الصلاحيات</label>
               <div class="row"  v-for="(ability, index) in abilities">
                   <div class="col-12 mt-4 mb-3">
                       <label class="form-check form-check-sm form-check-custom form-check-solid me-5" >
@@ -36,8 +36,8 @@
         </div>
         <div class="text-center pt-15">
             <button type="submit"  class="btn btn-primary">
-                <span class="indicator-label">Add</span>
-                <span class="" v-if="postProgress">Wait ...
+                <span class="indicator-label">حفظ</span>
+                <span class="" v-if="postProgress">انتظر ...
 									<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
             </button>
         </div>

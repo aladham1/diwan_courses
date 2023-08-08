@@ -28,7 +28,7 @@ class Course extends Model
     /**
      * @var string[]
      */
-    protected $appends = ['days'];
+    protected $appends = ['days', 'status'];
 
     /**
      * @return BelongsToMany
@@ -50,6 +50,14 @@ class Course extends Model
             $numberOfDays = $endAt->diffInDays($startAt);
         }
         return $numberOfDays;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatusAttribute(): string
+    {
+        return $this->is_active ? 'فعالة' : 'غير فعالة';
     }
 
 }
