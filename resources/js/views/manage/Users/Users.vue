@@ -211,6 +211,7 @@ export default {
                 ssn: '',
                 name: '',
                 phone: '',
+                roles: [],
             }),
         }
     }
