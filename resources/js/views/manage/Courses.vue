@@ -160,7 +160,7 @@ export default {
     },
     computed: {
         processedUsers() {
-            return this.courses.map(course => {
+            return this.courses.data.map(course => {
                 course.users.forEach(user => {
                     user.is_evaluated = user.courseEvaluations.some(evaluation => evaluation.course_id === course.id);
                 });
