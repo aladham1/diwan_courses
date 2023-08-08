@@ -74,7 +74,7 @@
                                 </td>
 
                             <td class="text-center">
-                                <a :href="`courses/`  + course.id+`/edit`"
+                                <a v-if="can_edit" :href="`courses/`  + course.id+`/edit`"
                                    class="text-primary me-2">
                                     <i class="las la-pencil-alt text-primary fs-2x"></i>
                                 </a>
