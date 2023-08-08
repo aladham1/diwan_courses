@@ -77,7 +77,7 @@
                                     {{ course.status }}</p>
                                 <p v-else-if="course.is_active" class="badge m-2 badge-light-success">
                                     {{ course.status }}</p>
-                                </td>
+                            </td>
 
                             <td class="text-center">
                                 <a v-if="can_edit" :href="`courses/`  + course.id+`/edit`"
@@ -129,7 +129,12 @@
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.ssn }}</td>
-                                <td>{{ user.is_evaluated ? 'Evaluated' : 'Not Evaluated' }}</td>
+                                <td>
+                                    <a v-if="!user.is_evaluated" class="badge m-2 badge-light-danger">لم يتم التقييم</a>
+                                    <a :href="`/showEvaluate/`+user.evalutated_id" v-else-if="user.is_evaluated" target="_blank"
+                                       class="badge m-2 badge-light-success">تم التقييم</a>
+                                </td>
+
                             </tr>
                             </tbody>
                         </table>
@@ -160,12 +165,20 @@ export default {
     },
     computed: {
         processedUsers() {
-            return this.courses.data.map(course => {
+            if (!this.courses.data || !Array.isArray(this.courses.data)) {
+                return [];
+            }
+            const processedUsers = [];
+            this.courses.data.forEach(course => {
                 course.users.forEach(user => {
-                    user.is_evaluated = user.courseEvaluations.some(evaluation => evaluation.course_id === course.id);
+                    const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
+                    user.evalutated_id = evaluation ? evaluation.id : null;
+                    user.is_evaluated = evaluation !== undefined;
+                    processedUsers.push(user);
                 });
-                return course.users;
-            }).flat();
+            });
+
+            return processedUsers;
         }
     },
     mounted() {

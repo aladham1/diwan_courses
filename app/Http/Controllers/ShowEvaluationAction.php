@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Course;
 use App\Models\CourseEvaluation;
 use Illuminate\Http\Request;
 
-class GetEvaluationAction extends Controller
+class ShowEvaluationAction extends Controller
 {
 
-    public function __invoke(Request $request, Course $course)
+    public function __invoke(Request $request, $id)
     {
-        $evaluation = CourseEvaluation::whereCourseId($course->id)->whereUserId(auth()->id())->first();
-        if ($evaluation){
-            return view('manage.courses.evaluated',['course' => $course]);
-        }
+        $evaluation = CourseEvaluation::findOrFail($id);
         $trainerEvaluationColumns = [
             'knowledge_of_subject' => '1. المدرب لديه معرفة تامة بالمادة العلمية وإلمام بكل جوانبها',
             'presentation_skills' => '2. المدرب لديه مهارات في تقديم اللقاء وإدارته',
@@ -37,7 +33,7 @@ class GetEvaluationAction extends Controller
             'helped_skill_development' => 'هل تعتقد أن الدورة ساعدتك على تطوير مهاراتك',
             'general_evaluation' => 'ما هو تقييمك العام عن الدورة',
         ];
-        return \view('manage.courses.evaluation', ['course' => $course,
+        return view('manage.courses.evaluation_done',['evaluation' => $evaluation,
             'trainerEvaluationColumns' => $trainerEvaluationColumns,
             'otherEvaluationColumns' => $otherEvaluationColumns,
             'courseContentEvaluationColumns' => $courseContentEvaluationColumns]);
