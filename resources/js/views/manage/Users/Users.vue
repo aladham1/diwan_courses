@@ -162,7 +162,7 @@
                                                 class="form-check form-check-sm form-check-custom form-check-solid me-5">
                                                 <input class="form-check-input" type="checkbox" v-model="editForm.roles"
                                                        :value="role.id" name="roles"/>
-                                                <span class="form-check-label">{{ role.name }}</span>
+                                                <span class="form-check-label">{{ role.title }}</span>
                                             </label>
                                         </div>
 
