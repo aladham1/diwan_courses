@@ -77,6 +77,7 @@ class UserController extends Controller
             'phone' => $request->phone,
             'ssn' => $request->ssn,
         ]);
+        $user->roles()->sync($request->roles);
         return $user;
     }
 

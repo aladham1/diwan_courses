@@ -49,7 +49,7 @@
                             <th>الاسم</th>
                             <th>رقم الهوية</th>
                             <th>رقم الجوال</th>
-<!--                            <th>الادارة</th>-->
+                            <th>الصلاحيات</th>
                             <th class="text-center" v-if="can_delete || can_edit">عمليات</th>
                         </tr>
                         </thead>
@@ -59,10 +59,10 @@
                             <td>{{ user.name }}</td>
                             <td>{{ user.ssn }}</td>
                             <td>{{ user.phone }}</td>
-<!--                            <td>-->
-<!--                              <span v-for="role in user.roles" class="badge m-2 badge-light-primary"> {{ role.name }}-->
-<!--                            </span>-->
-<!--                            </td>-->
+                            <td>
+                              <span v-for="role in user.roles" class="badge m-2 badge-light-primary"> {{ role.title }}
+                            </span>
+                            </td>
                             <td class="text-center">
                                 <a href="javascript:;" v-if="can_edit && !deleted" @click="editUser(user)"
                                    class="text-primary me-2">
