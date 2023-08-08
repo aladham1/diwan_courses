@@ -154,23 +154,23 @@
                                           class="fv-plugins-message-container invalid-feedback"
                                           v-text="editForm.errors.get('phone')"></span>
                                 </div>
-<!--                                <div class="fv-row">-->
-<!--                                    <label class="fs-5 fw-bolder form-label mb-3">الصلاحيات</label>-->
-<!--                                    <div class="row">-->
-<!--                                        <div class="col-3 mb-3" v-for="role in roles">-->
-<!--                                            <label-->
-<!--                                                class="form-check form-check-sm form-check-custom form-check-solid me-5">-->
-<!--                                                <input class="form-check-input" type="checkbox" v-model="editForm.roles"-->
-<!--                                                       :value="role.id" name="roles"/>-->
-<!--                                                <span class="form-check-label">{{ role.name }}</span>-->
-<!--                                            </label>-->
-<!--                                        </div>-->
+                                <div class="fv-row">
+                                    <label class="fs-5 fw-bolder form-label mb-3">الصلاحيات</label>
+                                    <div class="row">
+                                        <div class="col-3 mb-3" v-for="role in roles">
+                                            <label
+                                                class="form-check form-check-sm form-check-custom form-check-solid me-5">
+                                                <input class="form-check-input" type="checkbox" v-model="editForm.roles"
+                                                       :value="role.id" name="roles"/>
+                                                <span class="form-check-label">{{ role.name }}</span>
+                                            </label>
+                                        </div>
 
-<!--                                    </div>-->
-<!--                                    <span v-if="editForm.errors.has('roles')"-->
-<!--                                          class="fv-plugins-message-container invalid-feedback"-->
-<!--                                          v-text="editForm.errors.get('roles')"></span>-->
-<!--                                </div>-->
+                                    </div>
+                                    <span v-if="editForm.errors.has('roles')"
+                                          class="fv-plugins-message-container invalid-feedback"
+                                          v-text="editForm.errors.get('roles')"></span>
+                                </div>
                             </div>
                             <div class="text-center pt-15">
                                 <button type="submit" :disabled="editForm.errors.any()" class="btn btn-primary">
