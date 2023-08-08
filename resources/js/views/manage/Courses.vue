@@ -131,7 +131,7 @@
                                 <td>{{ user.ssn }}</td>
                                 <td>
                                     <a v-if="!user.is_evaluated" class="badge m-2 badge-light-danger">لم يتم التقييم</a>
-                                    <a :href="`/showEvaluate/`+user.evalutated_id" v-else-if="user.is_evaluated"
+                                    <a :href="`showEvaluate/`+user.evalutated_id" v-else-if="user.is_evaluated"
                                        target="_blank"
                                        class="badge m-2 badge-light-success">تم التقييم</a>
                                 </td>
