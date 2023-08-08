@@ -49,7 +49,6 @@ class CourseController extends Controller
                 $query->where('user_id', auth()->id());
             });
         }
-        $courses = Course::with('users')->withCount('users');
         if (\request()->get('query') != 'null' && !empty(\request()->get('query'))) {
             $courses = $courses->where('title', 'LIKE', '%' . \request()->get('query') . '%');
         }
