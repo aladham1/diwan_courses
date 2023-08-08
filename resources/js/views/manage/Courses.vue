@@ -121,15 +121,15 @@
                                 <th>#</th>
                                 <th>الاسم</th>
                                 <th>رقم الهوية</th>
-                                <!--                                <th>الغاء الاشتراك</th>-->
+                                <th>التقييم</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(user, index) in this.subscriptionUsers">
+                            <tr v-for="(user, index) in processedUsers" :key="user.id">
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.ssn }}</td>
-
+                                <td>{{ user.is_evaluated ? 'Evaluated' : 'Not Evaluated' }}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -157,10 +157,20 @@ export default {
             'postProgress': false,
             subscriptionUsers: [],
         }
-    }
-    ,
+    },
+    computed: {
+        processedUsers() {
+            return this.courses.map(course => {
+                course.users.forEach(user => {
+                    user.is_evaluated = user.courseEvaluations.some(evaluation => evaluation.course_id === course.id);
+                });
+                return course.users;
+            }).flat();
+        }
+    },
     mounted() {
         this.getResults();
+
     },
     filters: {
         shorten(value) {

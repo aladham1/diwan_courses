@@ -68,6 +68,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'roles_users','user_id', 'role_id');
     }
 
+    public function courseEvaluations()
+    {
+        return $this->hasMany(CourseEvaluation::class);
+    }
 
     /**
      * @param $query
