@@ -42,7 +42,7 @@ class CourseController extends Controller
 
     public function getCourses(): Collection|LengthAwarePaginator|array
     {
-        if (Auth::user()->hasAbility('courses.update')) {
+        if (auth()->user()->hasAbility('courses.update')) {
             $courses = Course::with('users')->withCount('users');
         } else {
             $courses = Course::whereHas('users', function ($query) {
