@@ -56,7 +56,9 @@ class Course extends Model
         if ($this->start_at && $this->end_at) {
             $startAt = Carbon::parse($this->start_at);
             $endAt = Carbon::parse($this->end_at);
-            $numberOfDays = $endAt->diffInDays($startAt);
+
+            // Calculate the difference and add 1 if start and end dates are the same
+            $numberOfDays = $endAt->diffInDays($startAt) + ($startAt->equalTo($endAt) ? 1 : 0);
         }
         return $numberOfDays;
     }
