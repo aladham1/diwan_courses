@@ -2,7 +2,7 @@
     <x-slot name="titlePage">الرئيسية</x-slot>
     <div class="card card-bordered mb-7">
         <div class="card-header">
-            <h4>الدورات الحالية</h4>
+            <h4 class="card-title align-items-center flex-column">الدورات الحالية</h4>
         </div>
         <div class="card-body">
             <div class="row">
