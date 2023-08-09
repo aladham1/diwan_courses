@@ -10,7 +10,7 @@ use App\Http\Controllers\StoreEvaluationAction;
 use Illuminate\Support\Facades\Route;
 
 
-Route::middleware(['auth.sso'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::resource('roles', RoleController::class)->except('show', 'edit');
     Route::get('get-roles', [RoleController::class, 'getRoles']);

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\RedirectResponse;
 
 class HomeController extends Controller
 {
 
-    public function index(): RedirectResponse
+    public function index()
     {
-        return redirect()->route('courses.index');
+        return view('manage.home', ['courses' => Course::where('is_active', 1)->get()]);
     }
 
 }
