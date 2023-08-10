@@ -20,7 +20,11 @@
 															</span>
                                         <p class="text-primary fw-bold fs-6 mb-0">{{$course->title}}</p>
                                     </div>
-                                    <div class="col-6"><h3 class="home-d text-primary">{{ $course->days}} {{$course->days <= 10 ? 'أيام' :'يوم'}}</h3></div>
+                                    <div class="col-6">
+                                        <a href="#">
+                                        <h3 class="home-d text-primary">{{ $course->days}} {{$course->hours <= 10 ? 'ساعات' :'ساعة'}}</h3>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </a>
