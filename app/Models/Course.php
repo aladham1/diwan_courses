@@ -85,9 +85,9 @@ class Course extends Model
     public function bgColor()
     {
         if ($this->userCanEvaluate()) {
-            return "bg-light-success";
+            return "success";
         } else {
-            return "bg-light-primary";
+            return "primary";
         }
     }
 
