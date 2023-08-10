@@ -16,7 +16,7 @@ class GetEvaluationAction extends Controller
             return view('manage.courses.evaluated',['course' => $course]);
         }
         if (!$course->userCanEvaluate()){
-            return false;
+            abort(404);
         }
         $trainerEvaluationColumns = [
             'knowledge_of_subject' => '1. المدرب لديه معرفة تامة بالمادة العلمية وإلمام بكل جوانبها',
