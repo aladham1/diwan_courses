@@ -56,7 +56,18 @@
                 </div>
             </div>
 
-
+            <div class="row">
+                <div class="col-md-6">
+                    <label class="fs-5 fw-bolder form-label mb-2">
+                        <span class="required">عدد ساعات الدورة </span>
+                    </label>
+                    <input type="number" class="form-control form-control-solid" v-model="form.hours" placeholder="عدد ساعات الدورة "
+                           name="hours"/>
+                    <span v-if="form.errors.has('hours')"
+                          class="fv-plugins-message-container invalid-feedback"
+                          v-text="form.errors.get('hours')"></span>
+                </div>
+            </div>
         </div>
         <div class="text-center pt-15">
             <button type="submit" class="btn btn-primary">
@@ -81,6 +92,7 @@ export default {
             users: [],
             form: new Form({
                 title: '',
+                hours: '',
                 start_at: '',
                 end_at: '',
                 users: []

@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->string('title');
             $table->dateTime('start_at')->nullable();
             $table->dateTime('end_at')->nullable();
+            $table->integer('hours')->nullable();
             $table->unsignedInteger('created_by');
             $table->boolean('is_active')->default(true);
             $table->foreign('created_by')->references('id')->on('users')->cascadeOnDelete();

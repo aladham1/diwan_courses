@@ -48,7 +48,7 @@
                             <th>نموذج التقييم</th>
                             <th>تاريخ البداية</th>
                             <th>تاريخ النهاية</th>
-                            <th>عدد الأيام</th>
+                            <th>عدد الساعات</th>
                             <th>حالة الدورة</th>
                             <th class="text-center" v-if="can_edit || can_delete">العمليات</th>
                         </tr>
@@ -71,7 +71,7 @@
                             </td>
                             <td>{{ course.start_at | date }}</td>
                             <td>{{ course.end_at | date }}</td>
-                            <td>{{ course.days }} يوم</td>
+                            <td>{{ course.hours }} ساعة</td>
                             <td>
                                 <p v-if="!course.is_active" class="badge m-2 badge-light-danger">
                                     {{ course.status }}</p>
