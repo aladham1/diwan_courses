@@ -8,8 +8,8 @@
             <div class="row">
               @foreach($courses as $course)
                     <div class="col-md-3">
-                        <a href="#">
-                            <div class="col bg-light-primary px-6 py-8 rounded-2">
+                        <a href="{{$course->userCanEvaluate() ? route('evaluation.show', $course->id) : '#'}}">
+                            <div class="col {{$course->bgColor()}} px-6 py-8 rounded-2">
                                 <div class="row">
                                     <div class="col-6">
                             <span class="svg-icon svg-icon-3x svg-icon-primary d-block my-2">
@@ -21,9 +21,7 @@
                                         <p class="text-primary fw-bold fs-6 mb-0">{{$course->title}}</p>
                                     </div>
                                     <div class="col-6">
-                                        <a href="#">
                                         <h3 class="home-d text-primary">{{ $course->days}} {{$course->hours <= 10 ? 'ساعات' :'ساعة'}}</h3>
-                                        </a>
                                     </div>
                                 </div>
                             </div>

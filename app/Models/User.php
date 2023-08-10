@@ -73,6 +73,12 @@ class User extends Authenticatable
         return $this->hasMany(CourseEvaluation::class);
     }
 
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class);
+    }
+
     /**
      * @param $query
      * @return mixed
@@ -106,5 +112,10 @@ class User extends Authenticatable
             }
         }
         return false;
+    }
+
+    public function isAssociatedWithCourse($courseId)
+    {
+        return $this->courses->contains($courseId);
     }
 }

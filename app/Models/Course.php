@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use function Symfony\Component\Translation\t;
 
 /**
  * @method static create(array $data)
@@ -71,4 +72,31 @@ class Course extends Model
         return $this->is_active ? 'فعالة' : 'غير فعالة';
     }
 
+    public function isActive()
+    {
+        $currentDate = Carbon::now();
+        $activationDate = Carbon::parse($this->end_at); // Assuming your date column is 'start_date'
+
+        if ($currentDate >= $activationDate) {
+            return true;
+        }
+    }
+
+    public function bgColor()
+    {
+        if ($this->isActive()) {
+            return "bg-light-success";
+        } else {
+            return "bg-light-primary";
+        }
+    }
+
+    public function userCanEvaluate(): bool
+    {
+        $user = auth()->user();
+        if ($user->isAssociatedWithCourse($this->id) && $this->isActive()) {
+            return true;
+        }
+        return false;
+    }
 }
