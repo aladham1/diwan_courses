@@ -76,7 +76,7 @@
         <!--begin::Wrapper-->
         <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
             <!--begin::Header-->
-            <div id="kt_header" style="" class="header align-items-stretch">
+            <div id="kt_header" style=" background-color: #e9e9e9;" class="header align-items-stretch">
                 <!--begin::Container-->
                 <div class="container-fluid d-flex align-items-stretch justify-content-between">
                     <!--begin::Aside mobile toggle-->
@@ -108,7 +108,7 @@
                     <!--end::Mobile logo-->
                     <!--begin::Wrapper-->
                     <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
-                        <h4 class="m-auto" style="color:#0b75ba">نظام تقييم الدورات في ديوان الرقابة الإدارية والمالية - تطوير دائرة الحاسوب وتكنولوجيا المعلومات</h4>
+                        <h4 class="m-auto" style="color:#0b75ba; font-size: 21px">نظام تقييم الدورات في ديوان الرقابة الإدارية والمالية - تطوير دائرة الحاسوب وتكنولوجيا المعلومات</h4>
                         <!--begin::Toolbar wrapper-->
                         <div class="d-flex align-items-stretch flex-shrink-0">
                             <!--begin::User menu-->
