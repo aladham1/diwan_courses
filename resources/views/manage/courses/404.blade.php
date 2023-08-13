@@ -26,7 +26,7 @@
                     <!--begin::Wrapper-->
 
                     <!--begin::Illustration-->
-                    <img class="mx-auto h-150px h-lg-200px  theme-light-show" src="{{asset('assets/media/17.png')}}" alt="">
+                    <img class="mx-auto h-150px h-lg-200px  theme-light-show" src="{{asset('assets/media/18.png')}}" alt="">
                     <img class="mx-auto h-150px h-lg-200px  theme-dark-show" src="{{asset('assets/media/illustrations/misc/17-dark.png')}}" alt="">
 
                     <!--end::Illustration-->
