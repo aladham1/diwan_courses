@@ -2103,7 +2103,6 @@ __webpack_require__.r(__webpack_exports__);
         }
         var processedUsers = [];
         course.users.forEach(function (user) {
-          console.log(user);
           var evaluation = user.course_evaluations.find(function (evaluation) {
             return evaluation.course_id === course.id;
           });
@@ -2168,9 +2167,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showSubscriptions: function showSubscriptions(course, subscriptions) {
-      this.processedUsers(course);
+      console.log(this.processedUsers(course));
       $('#kt_modal').modal('show');
-      this.subscriptionUsers = subscriptions;
+      this.subscriptionUsers = this.processedUsers(course);
     },
     search: function search() {
       this.getResults(1);

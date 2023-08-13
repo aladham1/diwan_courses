@@ -190,7 +190,6 @@ export default {
                 }
                 const processedUsers = [];
                     course.users.forEach(user => {
-                        console.log(user);
                         const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
                         user.evalutated_id = evaluation ? evaluation.id : null;
                         user.is_evaluated = evaluation !== undefined;
@@ -253,9 +252,9 @@ export default {
 
         },
         showSubscriptions(course, subscriptions) {
-           this.processedUsers(course);
+           console.log(this.processedUsers(course));
             $('#kt_modal').modal('show');
-            this.subscriptionUsers = subscriptions;
+            this.subscriptionUsers = this.processedUsers(course);
         },
         search() {
             this.getResults(1);
