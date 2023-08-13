@@ -103,11 +103,9 @@ class Course extends Model
     {
         $hours = $this->hours;
         $word = 'ساعة';
-        if ($hours === 0 || $hours === 1) {
+        if ($hours <= 2) {
             $word = 'ساعة';
-        }  else if ($hours === 2) {
-            $word = 'ساعتين';
-        } else if ($hours >= 3 && hours <= 10) {
+        }  else if ($hours <= 10) {
             $word = 'ساعات';
         }
 
