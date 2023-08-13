@@ -166,25 +166,7 @@ export default {
             subscriptionUsers: [],
         }
     },
-    computed: {
-        processedUsers() {
-            if (this.can_edit) {
-                if (!this.courses.data || !Array.isArray(this.courses.data)) {
-                    return [];
-                }
-                const processedUsers = [];
-                this.courses.data.forEach(course => {
-                    course.users.forEach(user => {
-                        const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
-                        user.evalutated_id = evaluation ? evaluation.id : null;
-                        user.is_evaluated = evaluation !== undefined;
-                        processedUsers.push(user);
-                    });
-                });
-                return processedUsers;
-            }
-        }
-    },
+
     mounted() {
         this.getResults();
 
@@ -201,6 +183,21 @@ export default {
         },
     },
     methods: {
+        processedUsers(users) {
+            if (this.can_edit) {
+                if (!this.courses.data || !Array.isArray(this.courses.data)) {
+                    return [];
+                }
+                const processedUsers = [];
+                users.forEach(user => {
+                    const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
+                    user.evalutated_id = evaluation ? evaluation.id : null;
+                    user.is_evaluated = evaluation !== undefined;
+                    processedUsers.push(user);
+                });
+                return processedUsers;
+            }
+        },
         getResults(page = 1) {
             this.loading = true;
             let query = this.searchQuery;
@@ -255,9 +252,8 @@ export default {
 
         },
         showSubscriptions(subscriptions) {
-            console.log(subscriptions);
+            this.processedUsers(subscriptions);
             $('#kt_modal').modal('show');
-            this.subscriptionUsers = subscriptions;
         },
         search() {
             this.getResults(1);
