@@ -17,7 +17,7 @@
                 <span class="me-2">
 
                   شكراً لك، لقد قمت بتقييم دورة:  <br> <span style="font-size: 45px; color: green">{{$course->title}}</span>  <br> بنجاح!
-
+<br>
                     <a href="{{route('evaluation.showEvaluate', $evaluation->id)}}" class="btn btn-primary">مشاهدة القييم</a>
                 </span>
                         </div>
