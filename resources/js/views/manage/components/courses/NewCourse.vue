@@ -59,6 +59,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <label class="fs-5 fw-bolder form-label mb-2">
+                        <span class="required">اسم المدرب </span>
+                    </label>
+                    <input type="text" class="form-control form-control-solid" v-model="form.trainer_name" placeholder="اسم المدرب "
+                           name="trainer_name"/>
+                    <span v-if="form.errors.has('trainer_name')"
+                          class="fv-plugins-message-container invalid-feedback"
+                          v-text="form.errors.get('trainer_name')"></span>
+                </div>
+                <div class="col-md-6">
+                    <label class="fs-5 fw-bolder form-label mb-2">
                         <span class="required">عدد ساعات الدورة </span>
                     </label>
                     <input type="number" class="form-control form-control-solid" v-model="form.hours" placeholder="عدد ساعات الدورة "
@@ -93,6 +103,7 @@ export default {
             form: new Form({
                 title: '',
                 hours: '',
+                trainer_name: '',
                 start_at: '',
                 end_at: '',
                 users: []

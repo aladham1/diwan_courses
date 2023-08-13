@@ -20,7 +20,7 @@ class Course extends Model
     /**
      * @var string[]
      */
-    protected $fillable = ['title', 'is_active', 'start_at', 'end_at', 'hours', 'created_by'];
+    protected $fillable = ['title', 'is_active', 'start_at', 'end_at', 'hours','trainer_name', 'created_by'];
 
     /**
      * @var string[]

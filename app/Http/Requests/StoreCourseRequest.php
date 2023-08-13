@@ -27,6 +27,7 @@ class StoreCourseRequest extends FormRequest
             'title' => ['required','string'],
             'start_at' => ['required'],
             'end_at' => ['required', 'date', 'after_or_equal:start_at'],
+            'hours' => ['required'],
             'users' => ['required','array'],
             'users.*' => ['integer','exists:users,id'],
         ];
