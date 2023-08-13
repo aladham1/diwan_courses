@@ -255,6 +255,7 @@ export default {
 
         },
         showSubscriptions(subscriptions) {
+            console.log(subscriptions);
             $('#kt_modal').modal('show');
             this.subscriptionUsers = subscriptions;
         },
