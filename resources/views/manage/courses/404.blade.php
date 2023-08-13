@@ -15,11 +15,9 @@
                         <!--begin::Title-->
                         <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
                 <span class="me-2">
+عذراً لا يمكنك تقييم دورة {{$course->title}}
 
-                  شكراً لك، لقد قمت بتقييم دورة:  <br> <span style="font-size: 45px; color: green">{{$course->title}}</span>  <br> بنجاح!
-<br>
-                    <a href="{{route('evaluation.showEvaluate', $evaluation->id)}}" class="btn btn-primary">مشاهدة القييم</a>
-                </span>
+        </span>
                         </div>
                         <!--end::Title-->
 
