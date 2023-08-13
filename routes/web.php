@@ -25,7 +25,7 @@ Route::middleware(['auth.sso'])->group(function () {
     Route::resource('courses', CourseController::class);
     Route::get('get-courses', [CourseController::class, 'getCourses']);
     Route::get('course/{course}', GetEvaluationAction::class)->name('evaluation.show');
-    Route::get('showEvaluate/{id}', ShowEvaluationAction::class);
+    Route::get('showEvaluate/{id}', ShowEvaluationAction::class)->name('evaluation.showEvaluate');
     Route::post('course', StoreEvaluationAction::class)->name('evaluation.store');
 });
 

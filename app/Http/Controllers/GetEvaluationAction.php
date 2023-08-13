@@ -13,7 +13,8 @@ class GetEvaluationAction extends Controller
     {
         $evaluation = CourseEvaluation::whereCourseId($course->id)->whereUserId(auth()->id())->first();
         if ($evaluation){
-            return view('manage.courses.evaluated',['course' => $course]);
+//            return view('manage.courses.evaluated',['course' => $course]);
+             return redirect()->route('evaluation.showEvaluate', $evaluation->id);
         }
         if (!$course->userCanEvaluate()){
             abort(404);
