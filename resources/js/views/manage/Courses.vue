@@ -127,7 +127,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr v-for="(user, index) in processedUsers" :key="user.id">
+                            <tr v-for="(user, index) in subscriptionUsers" :key="user.id">
                                 <td>{{ index + 1 }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.ssn }}</td>

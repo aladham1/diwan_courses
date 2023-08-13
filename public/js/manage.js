@@ -3017,7 +3017,7 @@ var render = function render() {
     staticClass: "modal-body"
   }, [_c("table", {
     staticClass: "table table-row-bordered gy-5"
-  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.processedUsers, function (user, index) {
+  }, [_vm._m(0), _vm._v(" "), _c("tbody", _vm._l(_vm.subscriptionUsers, function (user, index) {
     return _c("tr", {
       key: user.id
     }, [_c("td", [_vm._v(_vm._s(index + 1))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(user.ssn))]), _vm._v(" "), _c("td", [!user.is_evaluated ? _c("a", {
