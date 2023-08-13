@@ -2166,9 +2166,10 @@ __webpack_require__.r(__webpack_exports__);
         }
       });
     },
-    showSubscriptions: function showSubscriptions(course) {
+    showSubscriptions: function showSubscriptions(course, subscriptions) {
       this.processedUsers(course);
       $('#kt_modal').modal('show');
+      this.subscriptionUsers = subscriptions;
     },
     search: function search() {
       this.getResults(1);
@@ -2922,7 +2923,7 @@ var render = function render() {
       },
       on: {
         click: function click($event) {
-          return _vm.showSubscriptions(course);
+          return _vm.showSubscriptions(course, course.users);
         }
       }
     }, [_vm._v("\n                                    " + _vm._s(course.users.length) + " مشترك\n                                ")])]) : _vm._e(), _vm._v(" "), _c("td", [_c("a", {

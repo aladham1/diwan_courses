@@ -63,7 +63,7 @@
                             </td>
                             <td>{{ course.title }}</td>
                             <td v-if="can_edit || can_delete">
-                                <a href="#" @click="showSubscriptions(course)">
+                                <a href="#" @click="showSubscriptions(course, course.users)">
                                     {{ course.users.length }} مشترك
                                 </a>
                             </td>
@@ -251,9 +251,10 @@ export default {
             });
 
         },
-        showSubscriptions(course) {
+        showSubscriptions(course, subscriptions) {
            this.processedUsers(course);
             $('#kt_modal').modal('show');
+            this.subscriptionUsers = subscriptions;
         },
         search() {
             this.getResults(1);
