@@ -14,7 +14,7 @@
                     <div class="mb-10">
                         <!--begin::Title-->
                         <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
-                <span class="me-2">
+                <span class="me-2" style="color:red;">
 عذراً لا يمكنك تقييم دورة {{$course->title}}
 
         </span>
