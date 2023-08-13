@@ -30,7 +30,7 @@ class Course extends Model
     /**
      * @var string[]
      */
-    protected $appends = ['days', 'status'];
+    protected $appends = ['days', 'status','hours_txt'];
 
     /**
      * @return BelongsToMany
@@ -98,5 +98,19 @@ class Course extends Model
             return true;
         }
         return false;
+    }
+    public function getHoursTxtAttribute()
+    {
+        $hours = $this->hours;
+        $word = 'ساعة';
+        if ($hours === 0 || $hours === 1) {
+            $word = 'ساعة';
+        }  else if ($hours === 2) {
+            $word = 'ساعتين';
+        } else if ($hours >= 3 && hours <= 10) {
+            $word = 'ساعات';
+        }
+
+        return $hours .' '. $word;
     }
 }
