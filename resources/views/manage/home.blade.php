@@ -21,7 +21,7 @@
                                         <p class="text-{{$course->bgColor()}} fw-bold fs-6 mb-0">{{$course->title}}</p>
                                     </div>
                                     <div class="col-6">
-                                        <h3 class="home-d text-{{$course->bgColor()}}">{{ $course->hours}} {{$course->hours_txt }}</h3>
+                                        <h3 class="home-d text-{{$course->bgColor()}}">{{$course->hours_txt }}</h3>
                                     </div>
                                 </div>
                             </div>
