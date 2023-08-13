@@ -190,6 +190,7 @@ export default {
                 }
                 const processedUsers = [];
                     course.users.forEach(user => {
+                        console.log(user);
                         const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
                         user.evalutated_id = evaluation ? evaluation.id : null;
                         user.is_evaluated = evaluation !== undefined;

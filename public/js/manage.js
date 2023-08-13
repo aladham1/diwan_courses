@@ -2103,6 +2103,7 @@ __webpack_require__.r(__webpack_exports__);
         }
         var processedUsers = [];
         course.users.forEach(function (user) {
+          console.log(user);
           var evaluation = user.course_evaluations.find(function (evaluation) {
             return evaluation.course_id === course.id;
           });
