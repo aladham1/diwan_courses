@@ -63,7 +63,7 @@
                             </td>
                             <td>{{ course.title }}</td>
                             <td v-if="can_edit || can_delete">
-                                <a href="#" @click="showSubscriptions(course.users)">
+                                <a href="#" @click="showSubscriptions(course)">
                                     {{ course.users.length }} مشترك
                                 </a>
                             </td>
@@ -183,18 +183,18 @@ export default {
         },
     },
     methods: {
-        processedUsers(users) {
+        processedUsers(course) {
             if (this.can_edit) {
                 if (!this.courses.data || !Array.isArray(this.courses.data)) {
                     return [];
                 }
                 const processedUsers = [];
-                users.forEach(user => {
-                    const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
-                    user.evalutated_id = evaluation ? evaluation.id : null;
-                    user.is_evaluated = evaluation !== undefined;
-                    processedUsers.push(user);
-                });
+                    course.users.forEach(user => {
+                        const evaluation = user.course_evaluations.find(evaluation => evaluation.course_id === course.id);
+                        user.evalutated_id = evaluation ? evaluation.id : null;
+                        user.is_evaluated = evaluation !== undefined;
+                        processedUsers.push(user);
+                    });
                 return processedUsers;
             }
         },
@@ -251,9 +251,10 @@ export default {
             });
 
         },
-        showSubscriptions(subscriptions) {
-            this.processedUsers(subscriptions);
+        showSubscriptions(course) {
+           this.processedUsers(course);
             $('#kt_modal').modal('show');
+            this.subscriptionUsers = subscriptions;
         },
         search() {
             this.getResults(1);
