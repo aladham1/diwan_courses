@@ -19,7 +19,7 @@ class GetEvaluationAction extends Controller
              return redirect()->route('evaluation.showEvaluate', $evaluation->id);
         }
         if (!$course->userCanEvaluate()){
-            abort(404);
+            return view('manage.courses.404',['course' => $course]);
         }
         $trainerEvaluationColumns = [
             'knowledge_of_subject' => '1. المدرب لديه معرفة تامة بالمادة العلمية وإلمام بكل جوانبها',
