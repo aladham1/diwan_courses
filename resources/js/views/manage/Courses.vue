@@ -254,7 +254,6 @@ export default {
         showSubscriptions(course) {
            this.processedUsers(course);
             $('#kt_modal').modal('show');
-            this.subscriptionUsers = subscriptions;
         },
         search() {
             this.getResults(1);
